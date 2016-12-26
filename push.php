@@ -4,7 +4,7 @@
 
 	$url = "https://api.line.me/v2/bot/message/push";
 
-	$userId = "aonrobot"
+	$userId = "aonrobot";
 
 	$text = "กินยาด้วยน้าา";
 
