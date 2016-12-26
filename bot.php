@@ -2,22 +2,40 @@
 
 $access_token = 'l+7jn+Q1c7J4DrhKg4nFYVy4Dxz9iZ1GWTY3kunHqCEVqmwsUo5++rnnppHZB+h7OHuBia3rg3zA/nJiZV3GXBsjmnfe3UGPjg1PQcvSgED3ZTwn9ib4Vs58wuvRz8UHjdszh6uJ+LJphkF5KlVYrAdB04t89/1O/w1cDnyilFU=';
 
-// Get POST body content
-$content = file_get_contents('php://input');
-// Parse JSON
-$events = json_decode($content, true);
-
 $url_push = "https://api.line.me/v2/bot/message/push";
 
 $url_reply = 'https://api.line.me/v2/bot/message/reply';
+
+
+function get_profile($userId){
+
+	global $access_token;
+
+	$url_profile = "https://api.line.me/v2/bot/profile/$userId";
+
+	$headers = array('Authorization: Bearer ' . $access_token);
+
+	$ch = curl_init($url_profile);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+
+	return $result;
+}
 
 function sent_userId($userId, $sentText){
 
 	global $access_token, $url_push;
 
+	$profile_info = get_profile($userId);
+
+	$profile_info = json_decode($profile_info);
+
 	$messages = [
 		'type' => 'text',
-		'text' => $sentText
+		'text' => $profile_info['displayName'] . " : " . $sentText
 	];
 
 	$data = [
@@ -43,6 +61,12 @@ function sent_userId($userId, $sentText){
 	return true;
 
 }
+
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
+
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
