@@ -2,14 +2,17 @@
 
 $access_token = 'l+7jn+Q1c7J4DrhKg4nFYVy4Dxz9iZ1GWTY3kunHqCEVqmwsUo5++rnnppHZB+h7OHuBia3rg3zA/nJiZV3GXBsjmnfe3UGPjg1PQcvSgED3ZTwn9ib4Vs58wuvRz8UHjdszh6uJ+LJphkF5KlVYrAdB04t89/1O/w1cDnyilFU=';
 
-$url_push = "https://api.line.me/v2/bot/message/push";
-
 $url_reply = 'https://api.line.me/v2/bot/message/reply';
+
+// Get POST body content
+$content = file_get_contents('php://input');
+// Parse JSON
+$events = json_decode($content, true);
 
 
 function get_profile($userId){
 
-	global $access_token;
+	$access_token = 'l+7jn+Q1c7J4DrhKg4nFYVy4Dxz9iZ1GWTY3kunHqCEVqmwsUo5++rnnppHZB+h7OHuBia3rg3zA/nJiZV3GXBsjmnfe3UGPjg1PQcvSgED3ZTwn9ib4Vs58wuvRz8UHjdszh6uJ+LJphkF5KlVYrAdB04t89/1O/w1cDnyilFU=';
 
 	$url_profile = "https://api.line.me/v2/bot/profile/$userId";
 
@@ -22,16 +25,16 @@ function get_profile($userId){
 	$result = curl_exec($ch);
 	curl_close($ch);
 
-	return $result;
+	return json_decode($result);
 }
 
-function sent_userId($userId, $sentText){
+function push_text($userId, $sentText){
 
-	global $access_token, $url_push;
+	$access_token = 'l+7jn+Q1c7J4DrhKg4nFYVy4Dxz9iZ1GWTY3kunHqCEVqmwsUo5++rnnppHZB+h7OHuBia3rg3zA/nJiZV3GXBsjmnfe3UGPjg1PQcvSgED3ZTwn9ib4Vs58wuvRz8UHjdszh6uJ+LJphkF5KlVYrAdB04t89/1O/w1cDnyilFU=';
 
-	$profile_info = get_profile($userId);
+	$url_push = "https://api.line.me/v2/bot/message/push";
 
-	$profile_info = json_decode($profile_info);
+	$profile_info = get_profile($sentText);
 
 	$messages = [
 		'type' => 'text',
@@ -62,11 +65,6 @@ function sent_userId($userId, $sentText){
 
 }
 
-// Get POST body content
-$content = file_get_contents('php://input');
-// Parse JSON
-$events = json_decode($content, true);
-
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	// Loop through each event
@@ -81,7 +79,7 @@ if (!is_null($events['events'])) {
 			if(strpos($text, "userId") !== false || strpos($text, "id") !== false || strpos($text, "ไอดี") !== false)
 			{
 
-				if(sent_userId("U44b4093b6bcf03beefc01f5f5d4a62d3", $event['source']['userId'])){
+				if(push_text("U44b4093b6bcf03beefc01f5f5d4a62d3", $event['source']['userId'])){
 
 					// Build message to reply back
 					$messages = [
@@ -116,4 +114,4 @@ if (!is_null($events['events'])) {
 	}
 }
 
-echo "OK2";
+echo "OK3";
