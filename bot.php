@@ -34,11 +34,13 @@ function push_text($userId, $sentText){
 
 	$url_push = "https://api.line.me/v2/bot/message/push";
 
-	$profile_info = get_profile($sentText);
+	//$profile_info = get_profile($sentText);
+
+	//$sentText = $profile_info['displayName'] . " : " . $sentText;
 
 	$messages = [
 		'type' => 'text',
-		'text' => $profile_info['displayName'] . " : " . $sentText
+		'text' => $sentText
 	];
 
 	$data = [
@@ -114,4 +116,4 @@ if (!is_null($events['events'])) {
 	}
 }
 
-echo "OK3";
+echo "OK4";
