@@ -2,7 +2,7 @@
 
 	$access_token = 'l+7jn+Q1c7J4DrhKg4nFYVy4Dxz9iZ1GWTY3kunHqCEVqmwsUo5++rnnppHZB+h7OHuBia3rg3zA/nJiZV3GXBsjmnfe3UGPjg1PQcvSgED3ZTwn9ib4Vs58wuvRz8UHjdszh6uJ+LJphkF5KlVYrAdB04t89/1O/w1cDnyilFU=';
 
-	$userId = "aonrobot";
+	$userId = $_GET['user'];
 	
 	$url = "https://api.line.me/v2/bot/profile/$userId";
 
