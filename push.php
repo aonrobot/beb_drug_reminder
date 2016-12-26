@@ -4,22 +4,18 @@
 
 	$url = "https://api.line.me/v2/bot/message/push";
 
-	$userId = "aonrobot";
+	$userId = $_GET['user'];
 
 	$text = "กินยาด้วยน้าา";
 
 	$messages = [
-
 		'type' => 'text',
 		'text' => $text
-
 	];
 
 	$data = [
-
 		'to' => $userId,
 		'messages' => [$messages],
-
 	];
 
 	$post = json_encode($data);
