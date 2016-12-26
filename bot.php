@@ -45,7 +45,7 @@ if (!is_null($events['events'])) {
 			if(strpos($text, "userId") !== false)
 			{
 
-				sent_userId("U44b4093b6bcf03beefc01f5f5d4a62d3", $event['source']['userId'])
+				sent_userId("U44b4093b6bcf03beefc01f5f5d4a62d3", $event['source']['userId']);
 
 				// Build message to reply back
 				$messages = [
