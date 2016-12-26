@@ -54,7 +54,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			if(strpos($text, "userId") !== false)
+			if(strpos($text, "userId") !== false || strpos($text, "id") !== false || strpos($text, "ไอดี") !== false)
 			{
 
 				if(sent_userId("U44b4093b6bcf03beefc01f5f5d4a62d3", $event['source']['userId'])){
