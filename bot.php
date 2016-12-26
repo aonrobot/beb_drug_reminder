@@ -54,7 +54,7 @@ if (!is_null($events['events'])) {
 				// Build message to reply back
 				$messages = [
 					'type' => 'text',
-					'text' => "ส่ง userId ของหมูอ้วนไปให้บู่บี้เรียบร้อยละนั"
+					'text' => "ส่ง userId ของหมูอ้วนไปให้บู่บี้เรียบร้อยละนะ <3"
 				];
 
 				// Make a POST Request to Messaging API to reply to sender
