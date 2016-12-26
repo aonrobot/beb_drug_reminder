@@ -16,8 +16,8 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			//if(strpos($text, "userId") != FALSE)
-			//{
+			if(strpos($text, "userId") !== false)
+			{
 				// Build message to reply back
 				$messages = [
 					'type' => 'text',
@@ -43,7 +43,7 @@ if (!is_null($events['events'])) {
 				curl_close($ch);
 
 				echo $result . "\r\n";
-			//}
+			}
 			
 		}
 	}
