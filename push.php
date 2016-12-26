@@ -4,9 +4,9 @@
 
 	$url = "https://api.line.me/v2/bot/message/push";
 
-	$userId = $_GET['user'];
+	$userId = $_GET['userId'];
 
-	$text = "กินยาด้วยน้าา";
+	$text = $_GET['text'];
 
 	$messages = [
 		'type' => 'text',
