@@ -135,26 +135,23 @@ if (!is_null($events['events'])) {
 		if ($event['type'] == 'message' && $event['message']['type'] == 'image') {
 			// Get text sent
 			$imgId = $event['message']['id'];
+			$imgUrl = $event['message']['originalContentUrl'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			if(strpos($text, "userId") !== false || strpos($text, "id") !== false || strpos($text, "ไอดี") !== false)
-			{
-				// Build message to reply back
-				$messages = [
-					'type' => 'text',
-					'text' => 'ส่งรูปมาแล้ว id คือ -> ' . $imgId
-				];
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => 'ส่งรูปมาแล้ว id คือ -> ' . $imgId . ' url คือ -> ' . $imgUrl
+			];
 
-				// Make a POST Request to Messaging API to reply to sender
-				$data = [
-					'replyToken' => $replyToken,
-					'messages' => [$messages],
-				];
+			// Make a POST Request to Messaging API to reply to sender
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
 
-				reply($data, $access_token, $url_reply);
-				
-			}
+			reply($data, $access_token, $url_reply);
 			
 		}
 	}
