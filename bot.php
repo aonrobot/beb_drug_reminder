@@ -134,7 +134,7 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'image' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'image') {
 			// Get text sent
-			$imgUrl = $event['message']['originalContentUrl'];
+			$imgId = $event['message']['id'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
@@ -143,7 +143,7 @@ if (!is_null($events['events'])) {
 				// Build message to reply back
 				$messages = [
 					'type' => 'text',
-					'text' => $imgUrl
+					'text' => 'ส่งรูปมาแล้ว id คือ -> ' . $imgId
 				];
 
 				// Make a POST Request to Messaging API to reply to sender
